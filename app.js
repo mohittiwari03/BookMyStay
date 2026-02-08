@@ -32,10 +32,12 @@ const userRouter = require("./routes/user.router.js")
 const dbUrl = process.env.ATLASDB_URL;
 
 
-main().then(() =>{console.log("connect to DB")})
-.catch((err) => {console.log(err)});
+main().then(() => { console.log("connected to DB") })
+.catch((err) => { console.log('Mongoose connection error:', err) });
 
-async function main(){await mongoose.connect(dbUrl)}
+async function main() {
+    await mongoose.connect(dbUrl);
+}
 
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname,"views"));
