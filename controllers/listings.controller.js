@@ -18,9 +18,9 @@ module.exports.showListing = async (req,res,next) =>{
         populate: {path: "author"},
     })
     .populate("owner");
-    if(!listing) {
-        req.flash("error", "Listing you requested for does not existed!")
-        res.redirect("/listings");
+    if(!listings) {
+        req.flash("error", "Listing you requested for does not exist!")
+        return res.redirect("/listings");
     }
     res.render("listings/show.ejs", {listings});
 }
@@ -48,9 +48,12 @@ module.exports.editListing = async (req,res) =>{
         res.redirect("/listings");
     }
 
-    let originalImageUrl = listings.image.url;
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250")
-    res.render("listings/edit.ejs" ,{listings, originalImageUrl});
+    // Safely access image URL — listing may not have an image
+    let originalImageUrl = null;
+    if (listings.image && listings.image.url) {
+        originalImageUrl = listings.image.url.replace("/upload", "/upload/w_250");
+    }
+    res.render("listings/edit.ejs", {listings, originalImageUrl});
 }
 
 
