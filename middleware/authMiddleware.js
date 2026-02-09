@@ -1,8 +1,8 @@
 
-const expressError = require("./utils/expressErrors.js")
-const  {listingSchema, reviewSchema}  = require("./schema.js");
-const Listing = require("./models/listing.js");
-const Review = require("./models/review.js");
+const expressError = require("../utils/expressErrors.js")
+const  {listingSchema, reviewSchema}  = require("../schema.js");
+const Listing = require("../models/listing.js");
+const Review = require("../models/review.js");
 
 
 module.exports.validateListing = (req,res,next) =>{
