@@ -32,11 +32,11 @@ module.exports.renderLogInForm = (req,res) =>{
 }
 
 module.exports.logIn = async (req,res) =>{
-    req.login(registerUser, (err) => {
-        if(err) {
-            return next(err);
-        }
-        })
+    // req.login(registerUser, (err) => {
+    //     if(err) {
+    //         return next(err);
+    //     }
+    //     })
         req.flash("success", "Logged In successfully");
         const redirectUrl = res.locals.redirectUrl || "/listings" ;
         res.redirect(redirectUrl);
